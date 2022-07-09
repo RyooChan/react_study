@@ -3,15 +3,19 @@ import Notification from "./Notification";
 
 const reservedNotifications = [
     {
+        id: 1,
         message: "안녕하세요.",
     },
     {
+        id: 2,
         message: "반가워요.",
     },
     {
+        id: 3,
         message: "잘있어요.",
     },
     {
+        id: 4,
         message: "다시 만나요.",
     },
 ]
@@ -39,6 +43,10 @@ class NotificationList extends React.Component {
                     notifications: notifications,
                 });
             } else{
+                // upmount시켜주기 위해 알림이 끝나면 notifications배열을 비운다. 이를 setState함수를 사용하여 state를 업데이트해준다.
+                this.setState({
+                    notifications: [],
+                });
                 clearInterval(timer);
             }
         }, 1000);
@@ -48,7 +56,13 @@ class NotificationList extends React.Component {
         return (
             <div>
                 {this.state.notifications.map((notification) => {
-                    return <Notification message={notification.message} />;
+                    return (
+                        <Notification 
+                            key = {notification.id}
+                            id = {notification.id}
+                            message={notification.message} 
+                        />
+                    )
                 })}
             </div>
         );
